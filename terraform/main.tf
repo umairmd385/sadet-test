@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "s1" {
-  ami = "ami-05fb0b8c1424f266b"
+  ami = "ami-008fe2fc65df48dac"
   instance_type = "t2.micro"
   key_name     =  aws_key_pair.ec2.key_name
   security_groups	= ["allow-ssh"]

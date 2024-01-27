@@ -49,6 +49,35 @@ pipeline {
             steps {
                 script {
                     dir('terraform') {
+                        writeFile file: 'variable.tf', text: '''
+                        variable region {
+                            type = string
+                        }
+
+                        variable access_key {
+                            type = string
+                        }
+
+                        variable secret_key {
+                            type = string
+                        }
+
+                        variable username {
+                            default = "ubuntu"
+                        }
+
+                        variable PATH_TO_PRIVATE_KEY {
+                            default = "ssh-connfile"
+                        }
+
+                        variable PATH_TO_PUBLIC_KEY {
+                            default  = "ssh-connfile.pub"
+                        }
+                        '''
+
+                        // Export AWS credentials as environment variables
+                        sh "echo 'access_key = \"${AWS_ACCESS_KEY_ID}\"' >> variable.tf"
+                        sh "echo 'secret_key = \"${AWS_SECRET_ACCESS_KEY}\"' >> variable.tf"
                         sh "terraform init"
                     }
                 }

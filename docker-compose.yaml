@@ -1,0 +1,50 @@
+services:
+  sadet-test:
+    container_name: sadet-app-container
+    image: technicaltalk/sadet:latest
+    ports:
+      - 18080:9000
+    depends_on:
+      - mysql-service
+      - redis-service
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 3
+      endpoint_mode: vip
+    networks:
+      - php-app
+    volumes:
+      - ./sadet/app-data:/var/www/html
+    
+  mysql-service:
+    container_name: sadet-db-container
+    image: mysql:8.3.0
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=Sadet-test
+      - MYSQL_DATABASE=sadet
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpassword
+    restart: always
+    volumes:
+      - $PWD/sadet/db-data:/var/lib/mysql
+    networks:
+      - php-app
+    
+  redis-service:
+    container_name: sadet-cachedb-container
+    image: redis:6.2
+    command: redis-server --save 20 1 --loglevel warning --requirepass testpassword
+    ports:
+      - 6379:6379
+    restart: always
+    volumes:
+      - $PWD/sadet/cache-data:/data
+    networks:
+      - php-app
+
+networks:
+  php-app:
+    driver: bridge

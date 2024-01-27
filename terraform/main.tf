@@ -10,7 +10,7 @@ terraform {
 # login with aws credentials
 
 provider "aws" {
-  region     = "${var.region}"
+  region     = "us-west-2"
 }
 
 resource "aws_instance" "s1" {
@@ -57,7 +57,7 @@ resource "aws_vpc" "vpc1" {
 resource "aws_subnet" "my_subnet" {
   vpc_id            = aws_vpc.vpc1.id
   cidr_block        = "172.16.10.0/24"
-  availability_zone = "ap-south-1a"
+  availability_zone = "us-west-2a"
 
   tags = {
     Name = "tf-subnet"

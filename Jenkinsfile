@@ -67,7 +67,7 @@ pipeline {
             steps {
                 script {
                     dir('terraform') {
-                        sh "terraform apply -auto-approve"
+                        sh "terraform $action -auto-approve"
                     }
                 }
             }

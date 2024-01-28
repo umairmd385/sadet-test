@@ -165,4 +165,3 @@ bower_components
 .env.*
 /vendor
 /node_modules
-.env

@@ -63,16 +63,7 @@ pipeline {
                 }
             }
         }
-        stage("Terraform Plan") {
-            steps {
-                script {
-                    dir('terraform') {
-                        sh "terraform plan"
-                    }
-                }
-            }
-        }
-        stage("Terraform Apply") {
+        stage("Deployment to Cloud") {
             steps {
                 script {
                     dir('terraform') {

@@ -1,9 +1,8 @@
 services:
   sadet-test:
-    container_name: sadet-app-container
     image: technicaltalk/sadet:latest
     ports:
-      - 18080:9000
+      - "18080-18082:9000"
     depends_on:
       - mysql-service
       - redis-service
@@ -14,8 +13,6 @@ services:
       endpoint_mode: vip
     networks:
       - php-app
-    volumes:
-      - ./sadet/app-data:/var/www/html
     
   mysql-service:
     container_name: sadet-db-container
@@ -29,7 +26,7 @@ services:
       - MYSQL_PASSWORD=testpassword
     restart: always
     volumes:
-      - $PWD/sadet/db-data:/var/lib/mysql
+      - ./sadet/db-data:/var/lib/mysql
     networks:
       - php-app
     
@@ -41,7 +38,7 @@ services:
       - 6379:6379
     restart: always
     volumes:
-      - $PWD/sadet/cache-data:/data
+      - ./sadet/cache-data:/data
     networks:
       - php-app
 

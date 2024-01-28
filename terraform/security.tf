@@ -13,7 +13,7 @@ resource "aws_security_group" "allow-ssh" {
   #Incomming traffic for php-application
   ingress {
     from_port = 18080
-    to_port   = 18080
+    to_port   = 18082
     protocol  = "tcp"
     cidr_blocks  = ["0.0.0.0/0"]
   }

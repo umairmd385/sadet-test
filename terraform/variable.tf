@@ -1,5 +1,5 @@
 variable username {
-    default = "ubuntu"
+    default = "ec2-user"
 }
 
 variable PATH_TO_PRIVATE_KEY {

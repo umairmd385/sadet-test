@@ -13,6 +13,5 @@ RUN composer update --ignore-platform-reqs \
     && php artisan key:generate \
     && php artisan optimize:clear \
     && mv php.ini /usr/local/etc/php
-VOLUME [ "/var/www/html" ]
 EXPOSE 9000
 ENTRYPOINT [ "/docker-php-entrypoint.sh" ]

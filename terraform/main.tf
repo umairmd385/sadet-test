@@ -10,11 +10,11 @@ terraform {
 # login with aws credentials
 
 provider "aws" {
-  region     = "us-west-2"
+  region     = "ap-south-1"
 }
 
 resource "aws_instance" "s1" {
-  ami = "ami-008fe2fc65df48dac"
+  ami = "ami-03f4878755434977f"
   instance_type = "t2.medium"
   key_name     =  aws_key_pair.ec2.key_name
   security_groups	= ["allow-ssh"]
@@ -60,7 +60,7 @@ resource "aws_vpc" "vpc1" {
 resource "aws_subnet" "my_subnet" {
   vpc_id            = aws_vpc.vpc1.id
   cidr_block        = "172.16.10.0/24"
-  availability_zone = "us-west-2a"
+  availability_zone = "ap-south-1a"
 
   tags = {
     Name = "tf-subnet"

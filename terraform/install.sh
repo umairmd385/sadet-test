@@ -1,24 +1,21 @@
 #!/bin/bash
 
-sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
+sudo yum update -y
+sudo yum install -y docker
+sudo service docker start
+sudo chkconfig docker on
 
-# Add the repository to Apt sources:
-echo \
-"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
 
 #Installing python3
-sudo apt-get install python3 python3-pip -y
+sudo yum install python3 python3-pip -y
 sudo pip3 install gdown
 sudo mv /usr/local/bin/gdown /usr/bin
+sudo usermod -aG docker ec2-user
+sudo chmod 777 /var/run/docker.sock
 
-gdown --fuzzy https://drive.google.com/file/d/1990w7k-Bj1MErX-onTRYUQqAJ_ux8lgd/view?usp=drive_link
+gdown --fuzzy https://drive.google.com/file/d/1nwIvuVj2vZrMv4p1-6M8T7760ZInuoR0/view?usp=drive_link
 
-sudo docker compose up -d
+sudo docker-compose up -d

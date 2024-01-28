@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "s1" {
-  ami = "ami-03f4878755434977f"
+  ami = "ami-00952f27cf14db9cd"
   instance_type = "t2.medium"
   key_name     =  aws_key_pair.ec2.key_name
   security_groups	= ["allow-ssh"]

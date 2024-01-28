@@ -15,9 +15,12 @@ provider "aws" {
 
 resource "aws_instance" "s1" {
   ami = "ami-008fe2fc65df48dac"
-  instance_type = "t2.micro"
+  instance_type = "t2.medium"
   key_name     =  aws_key_pair.ec2.key_name
   security_groups	= ["allow-ssh"]
+  root_block_device {
+    volume_size = 35
+  }
   tags = {
     Name = "server1"
   }
